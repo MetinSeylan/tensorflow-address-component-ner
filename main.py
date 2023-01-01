@@ -70,12 +70,6 @@ y_test = np.array(y_test)
 X_train = np.array(X_train)
 X_test = np.array(X_test)
 
-# Define the size of the vocabulary and the maximum input length
-vocab_size = len(tokenizer.word_index) + 1
-
-# Define the embedding layer
-embedding_layer = tf.keras.layers.Embedding(vocab_size, 128, input_length=128)
-
 # Define the LSTM layer
 lstm1 = tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(512, return_sequences=True))
 
@@ -96,7 +90,7 @@ model = tf.keras.Sequential([
 model.compile(loss='categorical_crossentropy', optimizer=Adam(0.0001), metrics=['accuracy'])
 
 # Fit the model on the input data and labels
-model.fit(X_train, y_train, validation_data=(X_test, y_test), epochs=2)
+model.fit(X_train, y_train, validation_data=(X_test, y_test), epochs=50)
 
 # Calculate the model's performance on the test data
 test_loss, test_accuracy = model.evaluate(X_test, y_test)
@@ -108,8 +102,9 @@ print("Test accuracy:", test_accuracy)
 
 loaded = tf.keras.models.load_model('./trained')
 
-predictions = loaded.predict(np.array([X_train[0]]))
+predictions = loaded.predict(np.array([X_train[1001]]))
 
+print(data['input'][20001])
 # Loop through the characters in the input sequence
 for i in range(128):
     # Get the predicted label for the current character
@@ -119,4 +114,4 @@ for i in range(128):
     label_name = [key for key in label_values if label_values[key] == predicted_label][0]
 
     # Print the character and the label name
-    print(f"{[*data['input'][0]][i]}: {label_name}")
+    print(f"{[*data['input'][20001]][i]}: {label_name}")
