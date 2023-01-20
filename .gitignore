@@ -2,3 +2,6 @@ logs
 .idea
 address.csv
 labels.csv
+dataset.csv
+.DS_Store
+__pycache__/
