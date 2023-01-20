@@ -5,3 +5,4 @@ labels.csv
 dataset.csv
 .DS_Store
 __pycache__/
+checkpoints
