@@ -8,8 +8,8 @@ def calculate_spe(y):
     return int(math.ceil((1. * y) / batch_size))
 
 
-batch_size = 32
-chunk_size = 32000
+batch_size = 128
+chunk_size = 960000
 data_len = 8746216
 validata_len = 8746216
 label_len = 26

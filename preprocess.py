@@ -48,8 +48,9 @@ def get_generator(data, tokenizer, chunk_size=32000, batch_size=32, label_len=26
         if chunk.size == 0:
             break
 
+        np.random.shuffle(chunk.values)
+
         for offset in range(0, chunk_size, batch_size):
-            print('\n', offset)
             y_train = chunk["label"].iloc[offset: offset + batch_size]
             x_train = chunk["input"].iloc[offset: offset + batch_size]
 
@@ -60,6 +61,3 @@ def get_generator(data, tokenizer, chunk_size=32000, batch_size=32, label_len=26
             batch_labels = [convert_labels(y, input_size, label_len) for y in y_train]
 
             yield np.array(batch_data), np.array(batch_labels)
-
-
-
